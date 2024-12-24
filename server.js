@@ -1,4 +1,4 @@
-// Import dependenci
+// Import dependencies
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,33 +6,36 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001; // Use Render's dynamic port
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-mongoose.connect('mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',{
+// MongoDB connection using environment variables
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/Auth', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000
+    serverSelectionTimeoutMS: 30000,
 }).then(() => {
     console.log('Connected to MongoDB');
 }).catch(err => {
     console.error('MongoDB connection failed:', err);
 });
 
+// User schema
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
 });
 
 const User = mongoose.model('User', userSchema);
 
-
-
+// Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, 'frontend')));
 
+// Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'login.html'));
 });
@@ -72,8 +75,7 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-
-
+// Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
