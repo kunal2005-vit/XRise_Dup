@@ -1,0 +1,48 @@
+.navbar {
+    background: #4CAF50; /* Gradient background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    font-family: 'Poppins', sans-serif; /* Modern font */
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem; /* Larger logo text */
+    font-weight: bold; /* Bold logo */
+    margin-left: -40px;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem; /* Larger font size for links */
+    margin-right: 20px; /* More spacing between links */
+    color: #ffffff; /* Light text color */
+    transition: color 0.3s ease, transform 0.1s ease; /* Smooth transition for hover */
+  }
+  
+  .nav-link:hover {
+    color: #f0c14b; /* Gold-like hover color */
+    transform: scale(1.1); /* Slightly enlarges on hover */
+  }
+  
+  .navbar-toggler-icon {
+    color: #fff; /* Ensures the toggler icon is visible */
+  }
+  
+  
+  .navbar-text {
+    color: #ffffff; /* Light text for the welcome message */
+    font-weight: bold;
+  }
+  
+  /* Admin dropdown */
+  .nav-item .dropdown-menu {
+    background-color: #1f1c2c; /* Dark background for the dropdown */
+  }
+  
+  .dropdown-item {
+    color: #ffffff;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0c14b; /* Gold hover effect */
+    color: #1f1c2c;
+  }
+  
