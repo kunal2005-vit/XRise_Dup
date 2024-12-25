@@ -13,9 +13,12 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define a schema and model
 const MetricsSchema = new mongoose.Schema({
+  id: Number,
   playtime: Number,
-  blocks_destroyed: Number,
-  blocks_placed: Number,
+  metric1: Number,
+  metric2: Number,
+  module_completed: { type: String, enum: ['Yes', 'No'], default: 'No' },
+  result: { type: String, default: '' },
   timestamp: { type: Date, default: Date.now }
 });
 
