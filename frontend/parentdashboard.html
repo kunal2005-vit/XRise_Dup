@@ -150,8 +150,8 @@
         }
         const metrics = await response.json();
 
-        // Filter metrics for the target user
-        const userMetrics = metrics.filter(metric => metric.player_id === targetUserId);
+        // Check if the `id` or `_id` is being used for filtering
+        const userMetrics = metrics.filter(metric => metric.id === targetUserId || metric._id === targetUserId);
 
         // Populate the user's metrics table
         const tableBody = document.querySelector("#userMetricsTable tbody");
@@ -185,5 +185,6 @@
     fetchUserMetrics();
   </script>
 </body>
+
 
 </html>
