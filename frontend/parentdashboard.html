@@ -119,13 +119,14 @@
 </head>
 
 <body>
-  <h1>Game Metrics Dashboard</h1>
+  <h1>Prents Dashboard</h1>
   <div id="dashboard">
     <!-- User-specific tables will be dynamically inserted here -->
   </div>
 
   <script>
     // Fetch metrics from the server
+      
     async function fetchMetrics() {
       try {
         const response = await fetch("https://xrise-dup-7lyv.onrender.com/get_metrics");
@@ -142,6 +143,7 @@
 
         // Iterate over the metrics and create/update tables for each user
         metrics.forEach((metric) => {
+            const jsonid = metric._id;
           const userId = metric.id; // Assuming `id` is the unique identifier for the user
 
           // Check if a table for this user already exists
@@ -152,7 +154,7 @@
             userTable = document.createElement("table");
             userTable.id = `userTable-${userId}`;
             userTable.innerHTML = `
-              <caption>Metrics for User ${userId}</caption>
+              <caption>Metrics for User ${userId} with ${jsonid}</caption>
               <thead>
                 <tr>
                   <th>Playtime (Minutes)</th>
