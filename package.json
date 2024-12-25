@@ -4,8 +4,13 @@
   "description": "A web app by Team 488",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
+  "devdependencies":{
+    "vite":"^4.0.0"
+  }
   "author": "Team 488",
   "license": "ISC",
   "dependencies": {
