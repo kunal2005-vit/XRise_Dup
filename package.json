@@ -10,7 +10,7 @@
   },
   "devdependencies":{
     "vite":"^4.0.0"
-  }
+  },
   "author": "Team 488",
   "license": "ISC",
   "dependencies": {
