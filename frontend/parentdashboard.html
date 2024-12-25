@@ -117,32 +117,16 @@
         }
     </style> -->
 </head>
+
 <body>
   <h1>Game Metrics Dashboard</h1>
   <div id="dashboard">
-    <h2>Metrics for User 69</h2>
-    <table id="userMetricsTable">
-      <thead>
-        <tr>
-          <th>Playtime (Minutes)</th>
-          <th>Metric 1</th>
-          <th>Metric 2</th>
-          <th>Module Completed</th>
-          <th>Result</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- User-specific metrics data will be inserted here -->
-      </tbody>
-    </table>
+    <!-- User-specific tables will be dynamically inserted here -->
   </div>
 
   <script>
-    const targetUserId = 69; // Specify the user ID to filter metrics
-
     // Fetch metrics from the server
-    async function fetchUserMetrics() {
+    async function fetchMetrics() {
       try {
         const response = await fetch("https://xrise-dup-7lyv.onrender.com/get_metrics");
         if (!response.ok) {
@@ -150,14 +134,45 @@
         }
         const metrics = await response.json();
 
-        // Check if the `id` or `_id` is being used for filtering
-        const userMetrics = metrics.filter(metric => metric.id === targetUserId || metric._id === targetUserId);
+        // Create a map to track tables for each user
+        const userTables = new Map();
 
-        // Populate the user's metrics table
-        const tableBody = document.querySelector("#userMetricsTable tbody");
-        tableBody.innerHTML = ""; // Clear previous content
+        // Get the dashboard container
+        const dashboard = document.getElementById("dashboard");
 
-        userMetrics.forEach(metric => {
+        // Iterate over the metrics and create/update tables for each user
+        metrics.forEach((metric) => {
+          const userId = metric.id; // Assuming `id` is the unique identifier for the user
+
+          // Check if a table for this user already exists
+          let userTable = userTables.get(userId);
+
+          if (!userTable) {
+            // Create a new table for this user
+            userTable = document.createElement("table");
+            userTable.id = `userTable-${userId}`;
+            userTable.innerHTML = `
+              <caption>Metrics for User ${userId}</caption>
+              <thead>
+                <tr>
+                  <th>Playtime (Minutes)</th>
+                  <th>Metric 1</th>
+                  <th>Metric 2</th>
+                  <th>Module Completed</th>
+                  <th>Result</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            `;
+            dashboard.appendChild(userTable);
+
+            // Add the table to the map
+            userTables.set(userId, userTable);
+          }
+
+          // Append the new metric as a row in the user's table
+          const tableBody = userTable.querySelector("tbody");
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${metric.playtime}</td>
@@ -169,20 +184,13 @@
           `;
           tableBody.appendChild(row);
         });
-
-        if (userMetrics.length === 0) {
-          // Show a message if no data is available for the user
-          const noDataRow = document.createElement("tr");
-          noDataRow.innerHTML = `<td colspan="6" style="text-align: center;">No metrics available for User ${targetUserId}</td>`;
-          tableBody.appendChild(noDataRow);
-        }
       } catch (error) {
         console.error("Error fetching metrics:", error);
       }
     }
 
-    // Call fetchUserMetrics when the page loads
-    fetchUserMetrics();
+    // Call fetchMetrics when the page loads
+    fetchMetrics();
   </script>
 </body>
 
