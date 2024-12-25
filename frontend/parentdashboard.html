@@ -118,79 +118,122 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand" href="home.html">
-                XRISE
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Welcome Message (Visible Only When Logged In) -->
-                
-                    <span class="navbar-text me-auto text-light">
-                        Welcome
-                    </span>
-                
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
+  <h1>Game Metrics Dashboard</h1>
+  <div id="dashboard">
+    <h2>Metrics Overview</h2>
+    <div id="playerMetricsContainer">
+      <!-- Metrics for each player will be displayed here -->
+    </div>
+  </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="aboutus.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                    </li>
+  <script>
+    let lastMetricsByPlayer = {};
 
+    // Fetch metrics from the server
+    async function fetchMetrics() {
+      try {
+        const response = await fetch("https://xrise-dup-7lyv.onrender.com/get_metrics");
+        if (!response.ok) {
+          throw new Error("Failed to fetch metrics");
+        }
+        const metrics = await response.json();
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.html">Logout</a>
-                        </li>
-                       
+        // Group metrics by player_id
+        const metricsByPlayer = groupMetricsByPlayer(metrics);
 
-                </ul>
-            </div>
-        </div>
-    </nav>
+        // Populate the dashboard
+        const container = document.getElementById("playerMetricsContainer");
+        container.innerHTML = ""; // Clear previous content
 
-    <header>
-        <h1 style="margin-top: 30px;">Parent Dashboard</h1>
-        <p>Monitor your child's progress and milestones achieved through XRise.</p>
-    </header>
+        Object.keys(metricsByPlayer).forEach(playerId => {
+          const playerMetrics = metricsByPlayer[playerId];
 
-    <section>
-        <div class="progress-card">
-            <h2>Social Skills Progress</h2>
-            <p>Current Level: Intermediate</p>
-            <div class="progress-bar">
-                <div style="width: 75%;">75%</div>
-            </div>
-        </div>
+          // Create a section for the player
+          const playerSection = document.createElement("div");
+          playerSection.className = "player-section";
+          playerSection.innerHTML = `
+            <h3>Player ID: ${playerId}</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Playtime (Minutes)</th>
+                  <th>Blocks Destroyed</th>
+                  <th>Blocks Placed</th>
+                  <th>Timestamp</th>
+                  <th>Improvement</th>
+                </tr>
+              </thead>
+              <tbody id="player-${playerId}-metricsTable">
+                <!-- Player-specific metrics data will be inserted here -->
+              </tbody>
+            </table>
+          `;
 
-        <div class="progress-card">
-            <h2>Behavioral Skills Progress</h2>
-            <p>Current Level: Beginner</p>
-            <div class="progress-bar">
-                <div style="width: 40%;">40%</div>
-            </div>
-        </div>
+          container.appendChild(playerSection);
 
-        <div class="progress-card">
-            <h2>Learning Modules Completed</h2>
-            <p>10 of 20 modules completed</p>
-            <div class="progress-bar">
-                <div style="width: 50%;">50%</div>
-            </div>
-        </div>
-    </section>
+          // Populate the player's metrics table
+          const tableBody = document.getElementById(`player-${playerId}-metricsTable`);
+          playerMetrics.forEach((metric, index) => {
+            const row = document.createElement("tr");
 
-    <footer>
-        <p>&copy; 2024 XRise. All Rights Reserved.</p>
-    </footer>
+            // Calculate improvement if there was a previous metric for this player
+            let improvement = '';
+            if (lastMetricsByPlayer[playerId]) {
+              improvement = calculateImprovement(lastMetricsByPlayer[playerId], metric);
+            }
+
+            row.innerHTML = `
+              <td>${metric.playtime}</td>
+              <td><div class="bar" style="width: ${metric.blocks_destroyed / 1000 * 100}%;">${metric.blocks_destroyed}</div></td>
+              <td><div class="bar" style="width: ${metric.blocks_placed / 1000 * 100}%;">${metric.blocks_placed}</div></td>
+              <td>${new Date(metric.timestamp).toLocaleString()}</td>
+              <td class="metric-row">${improvement}</td>
+            `;
+
+            tableBody.appendChild(row);
+            lastMetricsByPlayer[playerId] = metric; // Update last metric for this player
+          });
+        });
+      } catch (error) {
+        console.error("Error fetching metrics:", error);
+      }
+    }
+
+    // Group metrics by player_id
+    function groupMetricsByPlayer(metrics) {
+      return metrics.reduce((acc, metric) => {
+        if (!acc[metric.player_id]) {
+          acc[metric.player_id] = [];
+        }
+        acc[metric.player_id].push(metric);
+        return acc;
+      }, {});
+    }
+
+    // Calculate improvement between two metrics
+    function calculateImprovement(prev, current) {
+      const playtimeImprovement = calculatePercentageChange(prev.playtime, current.playtime);
+      const blocksDestroyedImprovement = calculatePercentageChange(prev.blocks_destroyed, current.blocks_destroyed);
+      const blocksPlacedImprovement = calculatePercentageChange(prev.blocks_placed, current.blocks_placed);
+
+      let improvementText = 'Improvements: ';
+      improvementText += `<br>Playtime: ${playtimeImprovement}%`;
+      improvementText += `<br>Blocks Destroyed: ${blocksDestroyedImprovement}%`;
+      improvementText += `<br>Blocks Placed: ${blocksPlacedImprovement}%`;
+
+      return improvementText;
+    }
+
+    // Calculate percentage change between two values
+    function calculatePercentageChange(prevValue, currentValue) {
+      if (prevValue === 0) return "N/A"; // Avoid division by zero
+      const change = currentValue - prevValue;
+      const percentageChange = (change / prevValue) * 100;
+      return percentageChange.toFixed(2);
+    }
+
+    // Call fetchMetrics when the page loads
+    fetchMetrics();
+  </script>
 </body>
 </html>
