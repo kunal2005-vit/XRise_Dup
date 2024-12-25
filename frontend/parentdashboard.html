@@ -11,7 +11,7 @@
     <!-- Swiper CSS for Gallery Slider -->
     <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <style>
+<!--     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -115,22 +115,34 @@
 
             
         }
-    </style>
+    </style> -->
 </head>
 <body>
   <h1>Game Metrics Dashboard</h1>
   <div id="dashboard">
-    <h2>Metrics Overview</h2>
-    <div id="playerMetricsContainer">
-      <!-- Metrics for each player will be displayed here -->
-    </div>
+    <h2>Metrics for User 69</h2>
+    <table id="userMetricsTable">
+      <thead>
+        <tr>
+          <th>Playtime (Minutes)</th>
+          <th>Metric 1</th>
+          <th>Metric 2</th>
+          <th>Module Completed</th>
+          <th>Result</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- User-specific metrics data will be inserted here -->
+      </tbody>
+    </table>
   </div>
 
   <script>
-    let lastMetricsByPlayer = {};
+    const targetUserId = 69; // Specify the user ID to filter metrics
 
     // Fetch metrics from the server
-    async function fetchMetrics() {
+    async function fetchUserMetrics() {
       try {
         const response = await fetch("https://xrise-dup-7lyv.onrender.com/get_metrics");
         if (!response.ok) {
@@ -138,102 +150,40 @@
         }
         const metrics = await response.json();
 
-        // Group metrics by player_id
-        const metricsByPlayer = groupMetricsByPlayer(metrics);
+        // Filter metrics for the target user
+        const userMetrics = metrics.filter(metric => metric.player_id === targetUserId);
 
-        // Populate the dashboard
-        const container = document.getElementById("playerMetricsContainer");
-        container.innerHTML = ""; // Clear previous content
+        // Populate the user's metrics table
+        const tableBody = document.querySelector("#userMetricsTable tbody");
+        tableBody.innerHTML = ""; // Clear previous content
 
-        Object.keys(metricsByPlayer).forEach(playerId => {
-          const playerMetrics = metricsByPlayer[playerId];
-
-          // Create a section for the player
-          const playerSection = document.createElement("div");
-          playerSection.className = "player-section";
-          playerSection.innerHTML = `
-            <h3>Player ID: ${playerId}</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Playtime (Minutes)</th>
-                  <th>Blocks Destroyed</th>
-                  <th>Blocks Placed</th>
-                  <th>Timestamp</th>
-                  <th>Improvement</th>
-                </tr>
-              </thead>
-              <tbody id="player-${playerId}-metricsTable">
-                <!-- Player-specific metrics data will be inserted here -->
-              </tbody>
-            </table>
+        userMetrics.forEach(metric => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${metric.playtime}</td>
+            <td>${metric.metric1}</td>
+            <td>${metric.metric2}</td>
+            <td>${metric.module_completed}</td>
+            <td>${metric.result}</td>
+            <td>${new Date(metric.timestamp).toLocaleString()}</td>
           `;
-
-          container.appendChild(playerSection);
-
-          // Populate the player's metrics table
-          const tableBody = document.getElementById(`player-${playerId}-metricsTable`);
-          playerMetrics.forEach((metric, index) => {
-            const row = document.createElement("tr");
-
-            // Calculate improvement if there was a previous metric for this player
-            let improvement = '';
-            if (lastMetricsByPlayer[playerId]) {
-              improvement = calculateImprovement(lastMetricsByPlayer[playerId], metric);
-            }
-
-            row.innerHTML = `
-              <td>${metric.playtime}</td>
-              <td><div class="bar" style="width: ${metric.blocks_destroyed / 1000 * 100}%;">${metric.blocks_destroyed}</div></td>
-              <td><div class="bar" style="width: ${metric.blocks_placed / 1000 * 100}%;">${metric.blocks_placed}</div></td>
-              <td>${new Date(metric.timestamp).toLocaleString()}</td>
-              <td class="metric-row">${improvement}</td>
-            `;
-
-            tableBody.appendChild(row);
-            lastMetricsByPlayer[playerId] = metric; // Update last metric for this player
-          });
+          tableBody.appendChild(row);
         });
+
+        if (userMetrics.length === 0) {
+          // Show a message if no data is available for the user
+          const noDataRow = document.createElement("tr");
+          noDataRow.innerHTML = `<td colspan="6" style="text-align: center;">No metrics available for User ${targetUserId}</td>`;
+          tableBody.appendChild(noDataRow);
+        }
       } catch (error) {
         console.error("Error fetching metrics:", error);
       }
     }
 
-    // Group metrics by player_id
-    function groupMetricsByPlayer(metrics) {
-      return metrics.reduce((acc, metric) => {
-        if (!acc[metric.player_id]) {
-          acc[metric.player_id] = [];
-        }
-        acc[metric.player_id].push(metric);
-        return acc;
-      }, {});
-    }
-
-    // Calculate improvement between two metrics
-    function calculateImprovement(prev, current) {
-      const playtimeImprovement = calculatePercentageChange(prev.playtime, current.playtime);
-      const blocksDestroyedImprovement = calculatePercentageChange(prev.blocks_destroyed, current.blocks_destroyed);
-      const blocksPlacedImprovement = calculatePercentageChange(prev.blocks_placed, current.blocks_placed);
-
-      let improvementText = 'Improvements: ';
-      improvementText += `<br>Playtime: ${playtimeImprovement}%`;
-      improvementText += `<br>Blocks Destroyed: ${blocksDestroyedImprovement}%`;
-      improvementText += `<br>Blocks Placed: ${blocksPlacedImprovement}%`;
-
-      return improvementText;
-    }
-
-    // Calculate percentage change between two values
-    function calculatePercentageChange(prevValue, currentValue) {
-      if (prevValue === 0) return "N/A"; // Avoid division by zero
-      const change = currentValue - prevValue;
-      const percentageChange = (change / prevValue) * 100;
-      return percentageChange.toFixed(2);
-    }
-
-    // Call fetchMetrics when the page loads
-    fetchMetrics();
+    // Call fetchUserMetrics when the page loads
+    fetchUserMetrics();
   </script>
 </body>
+
 </html>
