@@ -42,6 +42,18 @@ app.get("/get_metrics", async (req, res) => {
     res.status(500).send("Error fetching metrics: " + error.message);
   }
 });
+const dataToSend = {
+    result: "Hello, Player! Welcome to the XRise platform."
+};
+
+app.get('/get_data', (req, res) => {
+    try {
+        res.status(200).json(dataToSend); // Send the data as JSON
+    } catch (error) {
+        console.error("Error handling /get_data request:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
