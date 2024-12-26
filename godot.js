@@ -43,7 +43,7 @@ app.get("/get_metrics", async (req, res) => {
   }
 });
 const dataToSend = {
-    result: "Hello, Player! Welcome to the XRise platform."
+    "message": "Hello, player!"
 };
 
 app.get('/get_data', (req, res) => {
