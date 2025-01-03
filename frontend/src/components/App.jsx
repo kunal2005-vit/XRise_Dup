@@ -10,11 +10,11 @@ function App() {
     <div style={{marginTop : '-3.5rem'}}>
       <BrowserRouter >
         <Routes>
-          <Route path="/" element ={<Register/>} />
+          <Route path="/" element ={<Base/>} />
           <Route path="/register" element ={<Register/>} />
           <Route path="/login" element ={<Login/>} />
-          <Route path="/home" element ={<Home/>} />
-          <Route path="/base" element ={<Base/>} />
+          <Route path="/extras" element ={<Home/>} />
+          <Route path="/home" element ={<Base/>} />
         </Routes>
       </BrowserRouter>
     </div>
