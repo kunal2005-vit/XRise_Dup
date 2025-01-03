@@ -64,7 +64,7 @@ const Base = () => {
         </nav>
 
         <h1>Welcome to XRise</h1>
-        <p>Empowering children and teenagers with ASD and ID through innovative VR/AR technology.</p>
+        <p>Empowering children and teenagers with ASD and ID through innovative VR/AR technology.Empowering lives of children and thier parents.</p>
 
       </header>
       <section className="container my-5">
