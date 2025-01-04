@@ -14,10 +14,15 @@ function App() {
           <Route path="/" element ={<Base/>} />
           <Route path="/register" element ={<Register/>} />
           <Route path="/login" element ={<Login/>} />
+<<<<<<< HEAD
           <Route path="/home" element ={<Home/>} />
           <Route path="/base" element ={<Base/>} />
           <Route path="/parentdashboard" element ={<Parentdashboard/>} />
 
+=======
+          <Route path="/extras" element ={<Home/>} />
+          <Route path="/home" element ={<Base/>} />
+>>>>>>> 393c157226e54dc2aef1a4afba5abbcb1b63b78c
         </Routes>
       </BrowserRouter>
     </div>
