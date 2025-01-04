@@ -2,7 +2,7 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Base from './Base';
-import Parentdashboard from './ParentDashboard';
+import Parentdashboard from './Parentdashboard';
 import Profile from './Profile';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
