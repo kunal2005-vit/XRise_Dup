@@ -75,11 +75,11 @@ const Parentdashboard = () => {
             <ul className="navbar-nav ms-auto">
               {[
                 { path: '/', label: 'Home', icon: 'bi-house' },
-                { path: '../base#about', label: 'About', icon: 'bi-info-circle' },
-                { path: '#services', label: 'Services', icon: 'bi-gear' },
-                { path: '/parentdashboard', label: 'Contact', icon: 'bi-envelope' },
+                
+                
                 { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
                 { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
+                { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
               ].map((navItem) => (
                 <li className="nav-item" key={navItem.path}>
                   <Link

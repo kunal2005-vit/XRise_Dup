@@ -3,6 +3,7 @@ import Login from './Login';
 import Register from './Register';
 import Base from './Base';
 import Parentdashboard from './ParentDashboard';
+import Profile from './Profile';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route path="/home" element ={<Home/>} />
           <Route path="/base" element ={<Base/>} />
           <Route path="/parentdashboard" element ={<Parentdashboard/>} />
-
+          <Route path="/profile" element ={<Profile/>} />
         </Routes>
       </BrowserRouter>
     </div>
