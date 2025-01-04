@@ -1,0 +1,259 @@
+/* styles.css */
+
+/* Background Animation */
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.8));
+    animation: background-move 10s infinite alternate;
+  }
+  
+  /* Header Text Animation */
+  .animate-title {
+    position: relative;
+    z-index: 1;
+    animation: fade-in-down 2s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animate-text {
+    position: relative;
+    z-index: 1;
+    animation: fade-in-up 2s ease-out forwards;
+    opacity: 0;
+  }
+  
+  /* Animations */
+  @keyframes background-move {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-left {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes zoom-in {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-up {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply Animations */
+  .animate-header {
+    animation: fade-in 1.5s ease-out forwards;
+  }
+  
+  .animate-fade-up {
+    animation: fade-up 1.5s ease-out forwards;
+  }
+  .header-container {
+    animation: fade-up 5s ease-in-out infinite;
+  }
+  @keyframes change-animation {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    20% {
+      transform: translateY(-20px) scale(1.05) rotate(5deg);
+      opacity: 0.9;
+    }
+    40% {
+      transform: translateY(-30px) scale(1.1) rotate(-5deg);
+      opacity: 0.8;
+    }
+    60% {
+      transform: translateY(-20px) scale(1.05) rotate(5deg);
+      opacity: 0.9;
+    }
+    80% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(10px) scale(1.02) rotate(-3deg);
+      opacity: 1;
+    }
+  }
+  
+  .dynamic-header {
+    animation: change-animation 6s ease-in-out infinite;
+  }
+  .animate-slide-left {
+    animation: slide-left 1.5s ease-out forwards;
+  }
+  
+  .animate-zoom-in {
+    animation: zoom-in 1.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 1.5s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1.5s ease-out forwards;
+  }
+  
+  /* Hover Effect */
+  .hover-zoom:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-out;
+  }
+ 
+
+  /* Consistent Card Size */
+.card {
+    width: 350px;
+    height: 450px;
+  }
+  
+  .features-section .animate-fade-up,
+  .features-section .animate-zoom-in,
+  .about-section .animate-slide-left,
+  .about-section .animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1.5s ease-out;
+  }
+  
+  /* Trigger animation */
+  .features-section.animate-triggered .animate-fade-up,
+  .features-section.animate-triggered .animate-zoom-in,
+  .about-section.animate-triggered .animate-slide-left,
+  .about-section.animate-triggered .animate-fade-in {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+  /* Animation Styles */
+  @keyframes fadeUp {
+    0% {
+      opacity: 0.30;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-section:hover .animate-card {
+    
+    animation: fadeUp 3s ease-in-out forwards;
+  }
+  
+  .animate-fade-up {
+    opacity: 25;
+  }
+  
+  .animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  /* Trigger Animation */
+  .card.animate-card .animate-fade-up,
+  .card.animate-card .animate-slide-up {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 3s ease-in-out;
+
+  }
+  
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .page-container {
+    display: block;
+    width: 100%;
+  }
+  
+  .main-content {
+    padding: 20px; /* Adjust based on your design */
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+  }
+  
