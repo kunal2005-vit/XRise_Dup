@@ -8,18 +8,21 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "devdependencies":{
-    "vite":"^4.0.0"
+  "devdependencies": {
+    "vite": "^4.0.0"
   },
   "author": "Team 488",
   "license": "ISC",
   "dependencies": {
+    
     "bcrypt": "^5.1.1",
+    "bootstrap-icons": "^1.11.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.17.1",
     "helmet": "^8.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.14"
   }
 }

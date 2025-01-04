@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'; // Added import
 import '../styles/ParentDashboard.css'; // External CSS file for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/styles.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Parentdashboard = () => {
   const [metrics, setMetrics] = useState([]);
@@ -16,7 +16,7 @@ const Parentdashboard = () => {
 
   const fetchMetrics = async () => {
     try {
-      const response = await fetch('http://localhost:3000/get_metrics');
+      const response = await fetch('https://xrise-dup-7lyv.onrender.com/get_metrics');
       if (!response.ok) {
         throw new Error('Failed to fetch metrics');
       }
