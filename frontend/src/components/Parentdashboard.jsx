@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'; // Added import
 import '../styles/ParentDashboard.css'; // External CSS file for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/styles.css';
-// import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Parentdashboard = () => {
   const [metrics, setMetrics] = useState([]);

@@ -58,6 +58,7 @@ function Base() {
                 { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
                 { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
                 { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
+                { path: '/plans', label: 'Plans', icon: 'bi bi-shopping' },
               ].map((navItem) => (
                 <li className="nav-item" key={navItem.path}>
                   <a

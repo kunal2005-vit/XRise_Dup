@@ -1,0 +1,243 @@
+/* Modal Overlay - darkens the background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Modal Content */
+.modal-content {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #333;
+    opacity: 0;
+    transform: scale(1.1); /* Initial larger size for the modal */
+    animation: zoomIn 0.5s ease-out forwards; /* Zoom-in animation */
+    max-height: 80vh; /* Limit height to viewport height */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+}
+
+/* Animation for fade-in effect of the overlay */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animation for zoom-in effect of modal */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(1.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff6f61;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, background 0.3s;
+}
+
+/* Hover effect for close button */
+.close-btn:hover {
+    transform: scale(1.2);
+    background: #ff3b2f;
+}
+
+/* Add some spacing and padding to make content readable */
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: 'Verdana', sans-serif;
+}
+
+.modal-content .extra-info {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    color: #444;
+    margin-top: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* For mobile responsiveness */
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 90%;
+        padding: 20px;
+        max-height: 70vh; /* Adjust max height on mobile for better fit */
+    }
+
+    .close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Styling for scrollbar (optional) */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #ff6f61;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+  
+  /* Plan Card Styling */
+  .plan-card {
+    max-width: 350px;
+    background: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .plan-card .plan-type {
+    font-size: 0.9rem;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50px;
+  }
+  
+  .plan-card h2 {
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .plan-card .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1d3557;
+  }
+  
+  /* Button Styling */
+  button {
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Add to Cart Button */
+  button.add-to-cart {
+    background: linear-gradient(45deg, #43e97b, #38f9d7);
+    color: white;
+  }
+  
+  button.add-to-cart:hover {
+    background: linear-gradient(45deg, #38f9d7, #43e97b);
+  }
+  
+  /* More Details Button */
+  button.more-details {
+    background: linear-gradient(45deg, #fa709a, #fee140);
+    color: white;
+  }
+  
+  button.more-details:hover {
+    background: linear-gradient(45deg, #fee140, #fa709a);
+  }
+  
+  /* Cart Section Styling */
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item button {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    color: white;
+  }
+  
+  .cart-item button:hover {
+    background: linear-gradient(45deg, #f5576c, #f093fb);
+  }
+  
+  /* Total Price Styling */
+  .total-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #1d3557;
+  }
+  
+  .total-price button {
+    background: linear-gradient(45deg, #43cea2, #185a9d);
+    color: white;
+  }
+  
+  .total-price button:hover {
+    background: linear-gradient(45deg, #185a9d, #43cea2);
+  }
+  

@@ -4,6 +4,7 @@ import Register from './Register';
 import Base from './Base';
 import Parentdashboard from './Parentdashboard';
 import Profile from './Profile';
+import Plans from './Plans';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/base" element ={<Base/>} />
           <Route path="/parentdashboard" element ={<Parentdashboard/>} />
           <Route path="/profile" element ={<Profile/>} />
+          <Route path="/plans" element ={<Plans/>} />
         </Routes>
       </BrowserRouter>
     </div>

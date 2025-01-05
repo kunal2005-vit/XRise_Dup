@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../styles/styles.css';
-// import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Profile = () => {
   const location = useLocation();
@@ -75,6 +75,7 @@ const Profile = () => {
     <div
       className="container my-5"
       style={{
+       
         maxWidth: "1200px",
         background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
         padding: "30px",
@@ -83,7 +84,7 @@ const Profile = () => {
       }}
     >
       
-      <div className="text-center mb-4">
+      <div className="text-center mb-4" >
         <img
           src={user.profilePhoto}
           alt="User Profile"
@@ -95,6 +96,7 @@ const Profile = () => {
             borderColor: "#6c63ff",
             borderWidth: "4px",
             borderStyle: "solid",
+            
           }}
         />
         <h2 className="fw-bold mt-3">{user.name}</h2>
@@ -209,7 +211,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-            <Plans></Plans>
+
       {/* Buttons */}
       <div className="text-center mt-4">
         <button className="btn btn-primary me-2">
