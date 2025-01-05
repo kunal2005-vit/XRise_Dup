@@ -1,4 +1,5 @@
 import React from 'react'
+import { Provider } from "@/components/ui/provider"
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import Responsive from './styles/Responsive';
@@ -9,8 +10,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className="page-container">
     <Responsive>
+      <Provider>
+        <App />
       <App />
-      {/* <Footer /> */}
+      </Provider>
       </Responsive>
     </div>
   </React.StrictMode>
