@@ -5,5 +5,12 @@
       "moduleResolution": "Bundler",
       "skipLibCheck": true,
       "paths": {
+<<<<<<< HEAD
         "@/": ["./frontend/src/"]
       }}}
+=======
+        "@/*": ["./frontend/src/*"]
+      }
+    }
+  }
+>>>>>>> 81f256bbae3d44ef2544f18ec953a17b6d5ddd62
