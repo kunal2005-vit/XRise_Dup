@@ -209,7 +209,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
+            <Plans></Plans>
       {/* Buttons */}
       <div className="text-center mt-4">
         <button className="btn btn-primary me-2">

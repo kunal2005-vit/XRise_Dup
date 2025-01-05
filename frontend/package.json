@@ -24,6 +24,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^4.0.0",
+    "vite-jsconfig-paths": "^2.0.1",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "author": "Team 488",
