@@ -1,5 +1,6 @@
 import React from 'react'
-import { Provider } from "@/components/ui/provider"
+import { Provider } from "./components/ui/provider";
+
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import Responsive from './styles/Responsive';
