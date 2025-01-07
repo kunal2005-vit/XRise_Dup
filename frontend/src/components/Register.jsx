@@ -1,89 +1,153 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        subscriptionTier: 'Free',
+        role: 'Parent',
+        mobileNumber: '',
+        profession: '',
+    });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        
-        axios.post( 'https://xrise-dup.onrender.com/register', {name, email, password})
-        .then(result => {
-            console.log(result);
-            if(result.data === "Already registered"){
-                alert("E-mail already registered! Please Login to proceed.");
-                navigate('/login');
-            }
-            else{
-                alert("Registered successfully! Please Login to proceed.")
-                navigate('/login');
-            }
-            
-        })
-        .catch(err => console.log(err));
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios
+            .post('https://xrise-dup.onrender.com/register', formData)
+            .then((response) => {
+                console.log('Registration successful', response);
+                navigate('/login');
+            })
+            .catch((error) => {
+                console.error('Registration failed', error);
+            });
+    };
 
     return (
-        <div>
-            <div className="d-flex justify-content-center align-items-center text-center vh-100" style= {{backgroundImage : "linear-gradient(#00d5ff,#0095ff,rgba(93,0,255,.555))"}}>
-                <div className="bg-white p-3 rounded" style={{width : '40%'}}>
-                    <h2 className='mb-3 text-primary'>Register</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3 text-start">
-                            <label htmlFor="exampleInputEmail1" className="form-label">
-                                <strong >Name</strong>
-                            </label>
-                            <input 
-                                type="text"
-                                placeholder="Enter Name"
-                                className="form-control" 
-                                id="exampleInputname" 
-                                onChange={(event) => setName(event.target.value)}
-                                required
-                            /> 
-                        </div>
-                        <div className="mb-3 text-start">
-                            <label htmlFor="exampleInputEmail1" className="form-label">
-                                <strong>Email Id</strong>
-                            </label>
-                            <input 
-                                type="email" 
-                                placeholder="Enter Email"
-                                className="form-control" 
-                                id="exampleInputEmail1" 
-                                onChange={(event) => setEmail(event.target.value)}
-                                required
-                            /> 
-                        </div>
-                        <div className="mb-3 text-start">
-                            <label htmlFor="exampleInputPassword1" className="form-label">
-                                <strong>Password</strong>
-                            </label>
-                            <input 
-                                type="password" 
-                                placeholder="Enter Password"
-                                className="form-control" 
-                                id="exampleInputPassword1" 
-                                onChange={(event) => setPassword(event.target.value)}
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Register</button>
-                    </form>
-
-                    <p className='container my-2'>Already have an account ?</p>
-                    <Link to='/login' className="btn btn-secondary">Login</Link>
+        <div className="container">
+            <h2 className="my-4">Register</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
-            </div>
+                <div className="mb-3">
+                    <label className="form-label">Email</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Subscription Tier</label>
+                    <select
+                        className="form-select"
+                        name="subscriptionTier"
+                        value={formData.subscriptionTier}
+                        onChange={handleChange}
+                    >
+                        <option value="Free">Free</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Role</label>
+                    <select
+                        className="form-select"
+                        name="role"
+                        value={formData.role}
+                        onChange={handleChange}
+                    >
+                        <option value="Parent">Parent</option>
+                        <option value="Children">Children</option>
+                        <option value="Guardian">Guardian</option>
+                    </select>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Mobile Number</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="mobileNumber"
+                        value={formData.mobileNumber}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Profession</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="profession"
+                        value={formData.profession}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Tell Us about your self(optional)</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="profession"
+                        value={formData.bio}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Upload Profile Photo</label>
+                    <input
+                        type="file"
+                        className="form-control"
+                        name="profilePhoto"
+                        onChange={handleChange}
+                        accept="image/*"
+                        required
+                    />
+                </div>
+                
+                <button type="submit" className="btn btn-primary">
+                    Register
+                </button>
+            </form>
         </div>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;
