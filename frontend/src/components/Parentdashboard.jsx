@@ -13,13 +13,13 @@ const Parentdashboard = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Fetch user email from session storage
-  const userEmail = sessionStorage.getItem('userEmail');
-  if (!userEmail) {
-    // If email is not found, redirect to login
-    alert("Please log in first!");
-    navigate('/login'); // Redirect to the login page
-    return; // Prevent further execution of the component
-  }
+  // const userEmail = sessionStorage.getItem('userEmail');
+  // if (!userEmail) {
+  //   // If email is not found, redirect to login
+  //   alert("Please log in first!");
+  //   navigate('/login'); // Redirect to the login page
+  //   return; // Prevent further execution of the component
+  // }
 
   // Define PRN mapping
   const prnMapping = {
@@ -31,6 +31,13 @@ const Parentdashboard = () => {
   const userPrn = prnMapping[userEmail] || null;
 
   useEffect(() => {
+      const userEmail = sessionStorage.getItem('userEmail');
+        if (!userEmail) {
+    // If email is not found, redirect to login
+        alert("Please log in first!");
+        navigate('/login'); // Redirect to the login page
+        return; // Prevent further execution of the component
+        }
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setShowNavbar(currentScrollY < lastScrollY || currentScrollY <= 50);
