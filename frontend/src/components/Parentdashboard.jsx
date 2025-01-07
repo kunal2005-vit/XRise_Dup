@@ -7,20 +7,32 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Parentdashboard = () => {
   const [metrics, setMetrics] = useState([]);
-const location = useLocation();
-      const [showNavbar, setShowNavbar] = useState(true);
-        const [lastScrollY, setLastScrollY] = useState(0);
-      useEffect(() => {
-          const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            setShowNavbar(currentScrollY < lastScrollY || currentScrollY <= 50);
-            setLastScrollY(currentScrollY);
-          };
-      
-          window.addEventListener('scroll', handleScroll);
-          return () => window.removeEventListener('scroll', handleScroll);
-        }, [lastScrollY]); // Use location hook
-  const [lastMetric, setLastMetric] = useState(null);
+  const location = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Fetch user email from session storage
+  const userEmail = sessionStorage.getItem('userEmail');  // Assuming the email is stored in sessionStorage
+
+  // Define PRN mapping
+  const prnMapping = {
+    'kunalsonne@gmail.com': 69,
+    'prabhakar.uparkar23@vit.edu': 96,
+  };
+
+  // Get the corresponding PRN for the user
+  const userPrn = prnMapping[userEmail] || null;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setShowNavbar(currentScrollY < lastScrollY || currentScrollY <= 50);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   useEffect(() => {
     fetchMetrics();
@@ -33,10 +45,8 @@ const location = useLocation();
         throw new Error('Failed to fetch metrics');
       }
       const data = await response.json();
-      setMetrics(data);
-      if (data.length > 0) {
-        setLastMetric(data[data.length - 1]);
-      }
+      const filteredData = data.filter(item => item.PRN === userPrn); // Filter metrics by PRN
+      setMetrics(filteredData);
     } catch (error) {
       console.error('Error fetching metrics:', error);
     }
@@ -90,7 +100,7 @@ const location = useLocation();
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd'  }}>
+          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd' }}>
             <ul className="navbar-nav ms-auto">
               {[
                 { path: '/', label: 'Home', icon: 'bi-house' },
