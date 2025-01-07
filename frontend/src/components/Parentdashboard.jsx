@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Added import
-import '../styles/ParentDashboard.css'; // External CSS file for styling
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Added useNavigate import
+import '../styles/ParentDashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/styles.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -8,17 +8,18 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 const Parentdashboard = () => {
   const [metrics, setMetrics] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize navigate for redirection
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Fetch user email from session storage
   const userEmail = sessionStorage.getItem('userEmail');
-    if (!userEmail) {
+  if (!userEmail) {
+    // If email is not found, redirect to login
     alert("Please log in first!");
-    navigate('/login');
-    return;
-    }
-  // Assuming the email is stored in sessionStorage
+    navigate('/login'); // Redirect to the login page
+    return; // Prevent further execution of the component
+  }
 
   // Define PRN mapping
   const prnMapping = {
@@ -108,21 +109,31 @@ const Parentdashboard = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd' }}>
             <ul className="navbar-nav ms-auto">
-              {[
-                { path: '/', label: 'Home', icon: 'bi-house' },
-                { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
-                { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
-                { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
-                { path: '/plans', label: 'Subscription', icon: 'bi bi-cart' },
-                { path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex' },
-                { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
-              ].map((navItem) => (
+              {[{
+                path: '/', label: 'Home', icon: 'bi-house'
+              },
+              {
+                path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right'
+              },
+              {
+                path: '/signup', label: 'Signup', icon: 'bi-person-plus'
+              },
+              {
+                path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital'
+              },
+              {
+                path: '/plans', label: 'Subscription', icon: 'bi bi-cart'
+              },
+              {
+                path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex'
+              },
+              {
+                path: '/profile', label: 'Profile', icon: 'bi-person-circle'
+              }].map((navItem) => (
                 <li className="nav-item" key={navItem.path}>
                   <Link
                     to={navItem.path}
-                    className={`nav-link ${
-                      location.pathname === navItem.path ? 'active bg-light text-primary rounded px-3' : ''
-                    }`}
+                    className={`nav-link ${location.pathname === navItem.path ? 'active bg-light text-primary rounded px-3' : ''}`}
                   >
                     <i className={`bi ${navItem.icon} me-2`}></i>
                     {navItem.label}
@@ -153,18 +164,12 @@ const Parentdashboard = () => {
               <tr key={index}>
                 <td>{metric.playtime}</td>
                 <td>
-                  <div
-                    className="bar"
-                    style={{ width: `${Math.min((metric.blocks_destroyed / 1000) * 100, 100)}%` }}
-                  >
+                  <div className="bar" style={{ width: `${Math.min((metric.blocks_destroyed / 1000) * 100, 100)}%` }}>
                     {metric.blocks_destroyed}
                   </div>
                 </td>
                 <td>
-                  <div
-                    className="bar"
-                    style={{ width: `${Math.min((metric.blocks_placed / 1000) * 100, 100)}%` }}
-                  >
+                  <div className="bar" style={{ width: `${Math.min((metric.blocks_placed / 1000) * 100, 100)}%` }}>
                     {metric.blocks_placed}
                   </div>
                 </td>
