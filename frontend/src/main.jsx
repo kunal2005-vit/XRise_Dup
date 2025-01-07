@@ -9,7 +9,7 @@ import { Provider } from "./components/ui/provider";
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import Responsive from './styles/Responsive';
-//import Footer from './components/Footer'
+import Footer from './components/Footer'
 import './styles/styles.css'; // Import the CSS file
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -20,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App />
       </Provider>
       </Responsive>
+      <Footer />
     </div>
   </React.StrictMode>
 );

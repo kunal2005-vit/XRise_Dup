@@ -7,7 +7,19 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Parentdashboard = () => {
   const [metrics, setMetrics] = useState([]);
-  const location = useLocation(); // Use location hook
+const location = useLocation();
+      const [showNavbar, setShowNavbar] = useState(true);
+        const [lastScrollY, setLastScrollY] = useState(0);
+      useEffect(() => {
+          const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            setShowNavbar(currentScrollY < lastScrollY || currentScrollY <= 50);
+            setLastScrollY(currentScrollY);
+          };
+      
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }, [lastScrollY]); // Use location hook
   const [lastMetric, setLastMetric] = useState(null);
 
   useEffect(() => {
@@ -55,7 +67,14 @@ const Parentdashboard = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+      <nav
+        className={`navbar navbar-expand-lg navbar-dark bg-primary shadow-lg ${showNavbar ? 'sticky-top' : 'navbar-hidden'}`}
+        style={{
+          transition: 'transform 0.3s ease-in-out',
+          transform: showNavbar ? 'translateY(0)' : 'translateY(-100%)',
+          height: '70px',
+        }}
+      >
         <div className="container">
           <Link to="/" className="navbar-brand fs-4">
             <i className="bi bi-stars me-2"></i>XRise
@@ -71,14 +90,15 @@ const Parentdashboard = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd'  }}>
             <ul className="navbar-nav ms-auto">
               {[
                 { path: '/', label: 'Home', icon: 'bi-house' },
-                
-                
                 { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
                 { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
+                { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
+                { path: '/plans', label: 'Subscription', icon: 'bi bi-cart' },
+                { path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex' },
                 { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
               ].map((navItem) => (
                 <li className="nav-item" key={navItem.path}>

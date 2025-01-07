@@ -6,8 +6,19 @@ import '../styles/styles.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Profile = () => {
-  const location = useLocation();
-  const [showNavbar, setShowNavbar] = useState(true);
+const location = useLocation();
+      const [showNavbar, setShowNavbar] = useState(true);
+        const [lastScrollY, setLastScrollY] = useState(0);
+      useEffect(() => {
+          const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            setShowNavbar(currentScrollY < lastScrollY || currentScrollY <= 50);
+            setLastScrollY(currentScrollY);
+          };
+      
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }, [lastScrollY]); // Use location hook
 
   const user = {
     name: "John Doe",
@@ -47,11 +58,13 @@ const Profile = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd'  }}>
             <ul className="navbar-nav ms-auto">
               {[{ path: '/', label: 'Home', icon: 'bi-house' },
                 
-                { path: '/parentdashboard', label: 'Parentdashboard', icon: 'bi-people' },].map(
+                { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
+                { path: '/parentdashboard', label: 'Parentdashboard', icon: 'bi-people' },
+                { path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex' },].map(
                 (navItem) => (
                   <li className="nav-item" key={navItem.path}>
                     <Link

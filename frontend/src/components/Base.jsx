@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../styles/styles.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 import { Link, useLocation } from 'react-router-dom';
 
 function Base() {
@@ -48,7 +47,7 @@ function Base() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd'  }}>
             <ul className="navbar-nav ms-auto">
               {[
                 { path: '/', label: 'Home', icon: 'bi-house' },
@@ -57,8 +56,11 @@ function Base() {
                 { path: '/parentdashboard', label: 'Parentdashboard', icon: 'bi-people' },
                 { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
                 { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
+                
+                { path: '/plans', label: 'Plans', icon: 'bi bi-cart' },
+                { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
+                { path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex' },
                 { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
-                { path: '/plans', label: 'Plans', icon: 'bi bi-shopping' },
               ].map((navItem) => (
                 <li className="nav-item" key={navItem.path}>
                   <a
@@ -97,47 +99,182 @@ function Base() {
       </header>
 
       {/* Features Section */}
-      <section id="features" className="container my-5">
-        <h2 className="text-center mb-4">Features of XRise</h2>
-        <div className="features-grid">
-          <div className="feature-list">
-            <ul>
-              <li>Dual VR/AR capabilities</li>
-              <li>Adaptive AI-driven learning</li>
-              <li>Parental and therapist portal</li>
-              <li>User assessment reports</li>
-            </ul>
-          </div>
-          <div className="feature-image">
-            <img
-              src="https://st3.depositphotos.com/1092019/12815/i/450/depositphotos_128158612-stock-photo-features-on-small-chalkboard-3d.jpg"
-              alt="Features of XRise"
-              className="img-fluid"
-              style={{height:'40vh',width:'80vh'}}
-            />
-          </div>
-        </div>
-      </section>
+      <section
+  id="features"
+  className="container py-5"
+  style={{
+    backgroundColor: "#f8f9fa",
+    borderRadius: "15px",
+    padding: "50px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  }}
+>
+  <h2
+    className="text-center mb-4"
+    style={{
+      fontSize: "2.5rem",
+      fontWeight: "700",
+      color: "#374151",
+    }}
+  >
+    Features of XRise
+  </h2>
+  <div
+    className="row d-flex flex-column flex-lg-row justify-content-between align-items-center"
+    style={{ gap: "30px" }}
+  >
+    {/* Feature List (Text) */}
+    <div
+      className="col-lg-6 col-md-12 mb-4 mb-lg-0"
+      style={{
+        fontSize: "1.25rem",
+        lineHeight: "2",
+        color: "#4b5563",
+        textAlign: "justify",
+      }}
+    >
+      <ul
+        style={{
+          listStyleType: "none",
+          padding: "0",
+        }}
+      >
+        <li style={{ display: "flex", alignItems: "center" }}>
+          <i
+            className="bi bi-check-circle-fill me-2"
+            style={{ color: "#0d6efd", fontSize: "1.5rem" }}
+          ></i>
+          Dual VR/AR capabilities
+        </li>
+        <li style={{ display: "flex", alignItems: "center" }}>
+          <i
+            className="bi bi-check-circle-fill me-2"
+            style={{ color: "#0d6efd", fontSize: "1.5rem" }}
+          ></i>
+          Adaptive AI-driven learning
+        </li>
+        <li style={{ display: "flex", alignItems: "center" }}>
+          <i
+            className="bi bi-check-circle-fill me-2"
+            style={{ color: "#0d6efd", fontSize: "1.5rem" }}
+          ></i>
+          Parental and therapist portal
+        </li>
+        <li style={{ display: "flex", alignItems: "center" }}>
+          <i
+            className="bi bi-check-circle-fill me-2"
+            style={{ color: "#0d6efd", fontSize: "1.5rem" }}
+          ></i>
+          User assessment reports
+        </li>
+        <li style={{ display: "flex", alignItems: "center" }}>
+          <i
+            className="bi bi-check-circle-fill me-2"
+            style={{ color: "#0d6efd", fontSize: "1.5rem" }}
+          ></i>
+          <strong>
+            The headset is wireless and manufactured in-house by students,
+            offering engaging content tailored to individual needs without
+            external device complications.
+          </strong>
+        </li>
+      </ul>
+    </div>
 
-      {/* About Section */}
-      <section id="about" className="container my-5">
-        <h2 className="text-center mb-4">About XRise</h2>
-        <div className="about-grid">
-          <div className="about-image">
-            <img
-              src="https://cubicleninjas.com/wp-content/uploads/2017/12/howdoes360videowork.jpg"
-              alt="About XRise"
-              className="img-fluid"
-              style={{height:'40vh',width:'80vh'}}
-            />
-          </div>
-          <div className="about-text">
-            <p>
-              XRise is a platform designed for children and teenagers with Autism Spectrum Disorder (ASD) and Intellectual Disabilities (ID), focusing on the development and improvement of social and behavioral skills.
-            </p>
-          </div>
-        </div>
-      </section>
+    {/* Feature Image */}
+    <div
+      className="col-lg-6 col-md-12 text-center"
+      style={{
+        flex: "1",
+      }}
+    >
+      <img
+        src="https://st3.depositphotos.com/1092019/12815/i/450/depositphotos_128158612-stock-photo-features-on-small-chalkboard-3d.jpg"
+        alt="Features of XRise"
+        className="img-fluid rounded shadow"
+        style={{
+          height: "auto",
+          maxWidth: "100%",
+          objectFit: "cover",
+        }}
+      />
+    </div>
+  </div>
+</section>
+
+
+{/* About Section */}
+<section
+  id="about"
+  className="container py-5 my-5"
+  style={{
+    backgroundColor: "#ffffff",
+    borderRadius: "15px",
+    padding: "50px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  }}
+>
+  <h2
+    className="text-center mb-4"
+    style={{
+      fontSize: "2.5rem",
+      fontWeight: "700",
+      color: "#374151",
+    }}
+  >
+    About XRise
+  </h2>
+  <div
+    className="row d-flex flex-column flex-lg-row align-items-center"
+    style={{ gap: "30px" }}
+  >
+    {/* Image on the left for larger screens, on top for smaller screens */}
+    <div
+      className="col-lg-6 col-md-12 mb-4 mb-lg-0"
+      style={{
+        textAlign: "center",
+        flex: 1,
+      }}
+    >
+      <img
+        src="https://cubicleninjas.com/wp-content/uploads/2017/12/howdoes360videowork.jpg"
+        alt="About XRise"
+        className="img-fluid rounded shadow"
+        style={{
+          height: "auto",
+          width: "100%",
+          maxWidth: "100%",
+          objectFit: "cover",
+        }}
+      />
+    </div>
+
+    {/* Text on the right for larger screens, below the image for smaller screens */}
+    <div
+      className="col-lg-6 col-md-12"
+      style={{
+        fontSize: "1.25rem",
+        color: "#4b5563",
+        lineHeight: "1.8",
+        textAlign: "justify",
+        flex: 1,
+      }}
+    >
+      <p>
+        XRise is a platform designed for children and teenagers with Autism
+        Spectrum Disorder (ASD) and Intellectual Disabilities (ID), focusing on
+        the development and improvement of social and behavioral skills.
+      </p>
+      <p>
+        Our goal is to provide a structured learning experience using a
+        customized standalone VR headset.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
   
       {/* Services Section */}
       <section id="services" className="container my-5">
@@ -168,6 +305,8 @@ function Base() {
           ))}
         </div>
       </section>
+
+
     </div>
   );
 }
