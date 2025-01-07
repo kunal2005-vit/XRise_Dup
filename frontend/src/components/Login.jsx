@@ -12,20 +12,22 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        axios.post('https://xrise-dup.onrender.com/login', { email, password })
-        .then(result => {
-            console.log(result);
-            if (result.data === "Success") {
-                console.log("Login Success");
-                alert('Login successful!');
-                navigate('/profile');
-            } else {
-                alert('Incorrect password! Please try again.');
-            }
-        })
-        .catch(err => console.log(err));
-    }
+
+        axios.post('http://127.0.0.1:3001/login', { email, password })
+            .then(response => {
+                if (response.data.message === "Success") {
+                    // Store email in session storage
+                    sessionStorage.setItem('userEmail', email);
+
+                    // Redirect to profile page
+                    navigate('/profile');
+                } else {
+                    alert(response.data.message);
+                }
+            })
+            .catch(err => console.log(err));
+    };
+    
 
     return (
         <div>
