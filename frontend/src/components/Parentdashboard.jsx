@@ -13,11 +13,11 @@ const Parentdashboard = () => {
 
   // Fetch user email from session storage
   const userEmail = sessionStorage.getItem('userEmail');
-  if (!email) {
+    if (!email) {
     alert("Please log in first!");
     navigate('/login');
     return;
-}
+    }
   // Assuming the email is stored in sessionStorage
 
   // Define PRN mapping
