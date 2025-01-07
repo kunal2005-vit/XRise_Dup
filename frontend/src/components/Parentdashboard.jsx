@@ -12,7 +12,13 @@ const Parentdashboard = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Fetch user email from session storage
-  const userEmail = sessionStorage.getItem('userEmail');  // Assuming the email is stored in sessionStorage
+  const userEmail = sessionStorage.getItem('userEmail');
+  if (!email) {
+    alert("Please log in first!");
+    navigate('/login');
+    return;
+}
+  // Assuming the email is stored in sessionStorage
 
   // Define PRN mapping
   const prnMapping = {
