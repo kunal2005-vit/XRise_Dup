@@ -13,7 +13,7 @@ const Parentdashboard = () => {
 
   // Fetch user email from session storage
   const userEmail = sessionStorage.getItem('userEmail');
-    if (!email) {
+    if (!userEmail) {
     alert("Please log in first!");
     navigate('/login');
     return;
