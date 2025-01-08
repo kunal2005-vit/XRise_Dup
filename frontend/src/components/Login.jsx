@@ -13,7 +13,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post('https://xrise-dup.onrender.com/login', { email, password })
+        axios.post('http://127.0.0.1:3001/login', { email, password })
             .then(response => {
                 if (response.data.message === "Success") {
                     // Store email in session storage
@@ -80,7 +80,8 @@ const Login = () => {
                         </Button>
                     </form>
                     <p className='container my-2'>Don&apos;t have an account?</p>
-                    <Link to='/register' className="btn btn-secondary">Register</Link>
+                    <Link to='/register' className="btn btn-secondary">Register</Link><br></br><br></br>
+                    <Link to='/' className="btn btn-secondary">Back</Link>
                 </div>
             </div>
         </div>

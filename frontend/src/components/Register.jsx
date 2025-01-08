@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate,Link } from 'react-router-dom';
+import '../styles/Register.css';
 const Register = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -21,7 +21,12 @@ const Register = () => {
             [name]: value,
         }));
     };
-
+    const handleFileChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            profilePhoto: e.target.files[0],
+        }));
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
@@ -35,117 +40,123 @@ const Register = () => {
             });
     };
 
-    return (
-        <div className="container">
-            <h2 className="my-4">Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label className="form-label">Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Subscription Tier</label>
-                    <select
-                        className="form-select"
-                        name="subscriptionTier"
-                        value={formData.subscriptionTier}
-                        onChange={handleChange}
-                    >
-                        <option value="Free">Free</option>
-                        <option value="Premium">Premium</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Role</label>
-                    <select
-                        className="form-select"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleChange}
-                    >
-                        <option value="Parent">Parent</option>
-                        <option value="Children">Children</option>
-                        <option value="Guardian">Guardian</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Mobile Number</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="mobileNumber"
-                        value={formData.mobileNumber}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Profession</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="profession"
-                        value={formData.profession}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Tell Us about your self(optional)</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="profession"
-                        value={formData.bio}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Upload Profile Photo</label>
-                    <input
-                        type="file"
-                        className="form-control"
-                        name="profilePhoto"
-                        onChange={handleChange}
-                        accept="image/*"
-                        required
-                    />
-                </div>
-                
-                <button type="submit" className="btn btn-primary">
-                    Register
-                </button>
-            </form>
+    return   (
+        
+        <div className="register-container">
+           
+            <div className="register-card">
+            <br></br>
+                <h2 className="register-title">Join Our Community</h2>
+                <form onSubmit={handleSubmit} className="register-form">
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter your full name"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Enter a strong password"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Subscription Tier</label>
+                        <select
+                            name="subscriptionTier"
+                            value={formData.subscriptionTier}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="Free">Free</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Role</label>
+                        <select
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="Parent">Parent</option>
+                            <option value="Children">Children</option>
+                            <option value="Guardian">Guardian</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Mobile Number</label>
+                        <input
+                            type="text"
+                            name="mobileNumber"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                            placeholder="Enter your mobile number"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Profession</label>
+                        <input
+                            type="text"
+                            name="profession"
+                            value={formData.profession}
+                            onChange={handleChange}
+                            placeholder="Enter your profession"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Bio (Optional)</label>
+                        <textarea
+                            name="bio"
+                            value={formData.bio}
+                            onChange={handleChange}
+                            rows="3"
+                            placeholder="Tell us something about yourself"
+                        ></textarea>
+                    </div>
+                    <div className="form-group">
+                        <label>Profile Photo</label>
+                        <input
+                            type="file"
+                            name="profilePhoto"
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        />
+                    </div>
+                    <div className="form-actions">
+                        <button type="submit" className="btn-submit">
+                            Register
+                        </button>
+                        <Link to="/" className="btn-back">
+                            Back to Home
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

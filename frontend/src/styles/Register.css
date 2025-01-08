@@ -1,0 +1,138 @@
+/* Register.css */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #ff9a9e, #fad0c4, #fbc2eb);
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.register-card {
+    background: linear-gradient(145deg, #ffffff, #f3f5f7);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: none;
+}
+
+.register-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1f3c88;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+    background: -webkit-linear-gradient(#ff758c, #ff7eb3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.register-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.register-form label {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    color: #5e6970;
+}
+
+.register-form input,
+.register-form select,
+.register-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #34495e;
+    background: #f7f9fc;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus,
+.register-form textarea:focus {
+    outline: none;
+    border: 2px solid #ff758c;
+    box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
+    background: #ffffff;
+}
+
+.register-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.register-form .btn-submit {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: #ffffff;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+
+.register-form .btn-submit:hover {
+    background: linear-gradient(to left, #ff758c, #ff7eb3);
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(255, 117, 140, 0.3);
+}
+
+.register-form .btn-back {
+    text-decoration: none;
+    color: #34495e;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.register-form .btn-back:hover {
+    color: #ff758c;
+    text-decoration: underline;
+}
+
+textarea {
+    resize: none;
+}
+
+@media (max-width: 600px) {
+    .register-card {
+        padding: 30px;
+    }
+
+    .register-title {
+        font-size: 28px;
+    }
+
+    .register-form input,
+    .register-form select,
+    .register-form textarea {
+        font-size: 14px;
+    }
+}
+
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

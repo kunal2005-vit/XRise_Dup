@@ -22,62 +22,91 @@ function Base() {
   }, [lastScrollY]);
 
   return (
-    <div>
-      {/* Navbar */}
-      <nav
-        className={`navbar navbar-expand-lg navbar-dark bg-primary shadow-lg ${showNavbar ? 'sticky-top' : 'navbar-hidden'}`}
-        style={{
-          transition: 'transform 0.3s ease-in-out',
-          transform: showNavbar ? 'translateY(0)' : 'translateY(-100%)',
-          height: '70px',
-        }}
+    <div style={{backgroundColor : "#f39f9f"}}>
+     
+  {/* Navbar */}
+  <nav
+    className={`navbar navbar-expand-lg navbar-dark bg-primary shadow-lg ${showNavbar ? 'sticky-top' : 'navbar-hidden'}`}
+    style={{
+      transition: 'transform 0.3s ease-in-out',
+      transform: showNavbar ? 'translateY(0)' : 'translateY(-100%)',
+      height: '70px',
+    }}
+  >
+    <div className="container">
+      <Link to="/" className="navbar-brand fs-4">
+        <i className="bi bi-stars me-2"></i>XRise
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <div className="container">
-          <Link to="/" className="navbar-brand fs-4">
-            <i className="bi bi-stars me-2"></i>XRise
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd'  }}>
-            <ul className="navbar-nav ms-auto">
-              {[
-                { path: '/', label: 'Home', icon: 'bi-house' },
-                { path: '#about', label: 'About', icon: 'bi-info-circle' },
-                { path: '#services', label: 'Services', icon: 'bi-gear' },
-                { path: '/parentdashboard', label: 'Parentdashboard', icon: 'bi-people' },
-                { path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right' },
-                { path: '/signup', label: 'Signup', icon: 'bi-person-plus' },
-                
-                { path: '/plans', label: 'Plans', icon: 'bi bi-cart' },
-                { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
-                { path: '/contact', label: 'Contact Us', icon: 'bi bi-person-rolodex' },
-                { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
-              ].map((navItem) => (
-                <li className="nav-item" key={navItem.path}>
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav" style={{ backgroundColor: '#0d6efd' }}>
+        <ul className="navbar-nav ms-auto">
+          {[
+            { path: '/', label: 'Home', icon: 'bi-house' },
+            { path: '/parentdashboard', label: 'Parentdashboard', icon: 'bi-people' },
+            { path: '/plans', label: 'Plans', icon: 'bi bi-cart' },
+            { path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital' },
+            { path: '#about', label: 'About Us', icon: 'bi-info-circle' ,dropdown: true, items: [
+              { path: '#about', label: 'About Us' },
+              { path: '#services', label: 'Our Services' },
+              { path: '/contact', label: 'Contact Us' },
+            ] },
+            { path: '/profile', label: 'Profile', icon: 'bi-person-circle', dropdown: true, items: [
+              { path: '/profile', label: 'Profile' },
+              { path: '/login', label: 'Login' },
+              { path: '/register', label: 'Signup'},
+            ] },
+          ].map((navItem) => (
+            <li className={`nav-item ${navItem.dropdown ? 'dropdown' : ''}`} key={navItem.path}>
+              {navItem.dropdown ? (
+                <>
                   <a
-                    href={navItem.path}
-                    className={`nav-link ${location.pathname === navItem.path
-                      ? 'active bg-light text-primary rounded px-3'
-                      : ''}`}
+                    href="#"
+                    className="nav-link dropdown-toggle"
+                    id={`dropdown-${navItem.label}`}
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                   >
                     <i className={`bi ${navItem.icon} me-2`}></i>
                     {navItem.label}
                   </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </nav>
+                  <ul className="dropdown-menu" aria-labelledby={`dropdown-${navItem.label}`}>
+                    {navItem.items.map((dropdownItem) => (
+                      <li key={dropdownItem.path}>
+                        <a className="dropdown-item" href={dropdownItem.path}>
+                          {dropdownItem.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={navItem.path}
+                  className={`nav-link ${location.pathname === navItem.path
+                    ? 'active bg-light text-primary rounded px-3'
+                    : ''}`}
+                >
+                  <i className={`bi ${navItem.icon} me-2`}></i>
+                  {navItem.label}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </nav>
 
       {/* Hero Section */}
       <header id="home"
@@ -99,11 +128,14 @@ function Base() {
       </header>
 
       {/* Features Section */}
+
+
+        <br></br><br></br>
       <section
   id="features"
   className="container py-5"
   style={{
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#d4f3ef",
     borderRadius: "15px",
     padding: "50px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -202,13 +234,14 @@ function Base() {
   </div>
 </section>
 
-
 {/* About Section */}
+{/* About Section */}
+
 <section
   id="about"
-  className="container py-5 my-5"
+  className="container py-5 my-5 "
   style={{
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff5e1",
     borderRadius: "15px",
     padding: "50px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -275,10 +308,15 @@ function Base() {
 
 
 
+
   
       {/* Services Section */}
       <section id="services" className="container my-5">
-        <h2 className="text-center mb-4">Our Offerings</h2>
+        <h2 className="text-center mb-4"
+    style={{
+      fontSize: "2.5rem",
+      fontWeight: "700",
+      color: "#374151",}}>Our Offerings</h2>
         <div className="services-grid">
           {[
             {
@@ -306,7 +344,7 @@ function Base() {
         </div>
       </section>
 
-
+<br></br>
     </div>
   );
 }

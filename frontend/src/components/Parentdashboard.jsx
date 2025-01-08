@@ -123,7 +123,7 @@ const Parentdashboard = () => {
                 path: '/login', label: 'Login', icon: 'bi-box-arrow-in-right'
               },
               {
-                path: '/signup', label: 'Signup', icon: 'bi-person-plus'
+                path: '/register', label: 'Signup', icon: 'bi-person-plus'
               },
               {
                 path: '/therapist', label: 'Therapist', icon: 'bi bi-hospital'
