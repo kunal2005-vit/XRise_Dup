@@ -59,7 +59,7 @@ const Parentdashboard = () => {
         throw new Error('Failed to fetch metrics');
       }
       const data = await response.json();
-      const filteredData = data.filter(item => item.PRN === userPrn); // Filter metrics by PRN
+      const filteredData = data.filter(item => item.id === userPrn); // Filter metrics by PRN
       setMetrics(filteredData);
     } catch (error) {
       console.error('Error fetching metrics:', error);
